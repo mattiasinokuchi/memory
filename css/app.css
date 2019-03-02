@@ -14,14 +14,14 @@ section {
 }
 
 .deck {
-	width: 95vw;
+	width: 80vw;
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .deck .card {
-	height: 14vw;
-	width: 14vw;
+	height: 10vw;
+	width: 10vw;
 	margin: 0.5vw 0.5vw;
 	background: black;
 	font-size: 0;
@@ -41,7 +41,7 @@ section {
 }
 
 .deck .card.match {
-	background: yellow;
+	background: light green;
 	font-size: 10vw;
 }
 
