@@ -1,26 +1,23 @@
-// cards array holds all cards
+// declaring array for all cards
 let card = document.getElementsByClassName("card");
 let cards = [...card]
 
-// deck of all cards in game
+// declaring constant for deck of all cards in game
 const deck = document.getElementById("card-deck");
 
-// declaring move variable
+// declaring variable for card moves
 let moves = 0;
 let counter = document.querySelector(".moves");
 
-// declaring variable of matchedCards
+// declaring variable for matched cards
 let matchedCard = document.getElementsByClassName("match");
 
-// array for opened cards
+// declaring array for opened cards
 var openedCards = [];
 
-// @description shuffles cards
-// @param {array}
-// @returns shuffledarray
+// function for shuffle of cards
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -28,20 +25,15 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
-};
+}
 
-
-// @description shuffles cards when page is refreshed / loads
+// shuffles cards when page is refreshed or loads
 document.body.onload = startGame();
 
-
-// @description function to start a new play 
+// function to start a new play (remove all exisiting classes from each card and reset moves)
 function startGame(){
-    // shuffle deck
     cards = shuffle(cards);
-    // remove all exisiting classes from each card
     for (var i = 0; i < cards.length; i++){
         deck.innerHTML = "";
         [].forEach.call(cards, function(item) {
@@ -49,29 +41,27 @@ function startGame(){
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
     }
-    // reset moves
     moves = 0;
     counter.innerHTML = moves;
 }
 
-
-// @description toggles open and show class to display cards
+// function for display cards
 var displayCard = function (){
     this.classList.toggle("open");
     this.classList.toggle("show");
     this.classList.toggle("disabled");
-};
+}
 
-// speech
+// function for japanese speech
 function speech(e){
     var msg = new SpeechSynthesisUtterance();
-    msg.rate = 10; // 0.1 to 10
+    msg.rate = 10;
     msg.text = e.target.textContent;
     msg.lang = 'ja-JP';
     speechSynthesis.speak(msg);
 }
 
-// @description add opened cards to OpenedCards list and check if cards are match or not
+// function for adding opened cards to OpenedCards list and check if cards are matched or not
 function cardOpen() {
     openedCards.push(this);
     var len = openedCards.length;
@@ -83,9 +73,9 @@ function cardOpen() {
             unmatched();
         }
     }
-};
+}
 
-// @description when cards match
+// function for matched cards
 function matched(){
     openedCards[0].classList.add("match", "disabled");
     openedCards[1].classList.add("match", "disabled");
@@ -94,7 +84,7 @@ function matched(){
     openedCards = [];
 }
 
-// description when cards don't match
+// function for unmatched cards
 function unmatched(){
     openedCards[0].classList.add("unmatched");
     openedCards[1].classList.add("unmatched");
@@ -107,14 +97,14 @@ function unmatched(){
     },1500);
 }
 
-// @description disable cards temporarily
+// function for disable cards temporarily
 function disable(){
     Array.prototype.filter.call(cards, function(card){
         card.classList.add('disabled');
     });
 }
 
-// @description enable cards and disable matched cards
+// function for enable unmatched cards and disable matched cards
 function enable(){
     Array.prototype.filter.call(cards, function(card){
         card.classList.remove('disabled');
@@ -124,7 +114,7 @@ function enable(){
     });
 }
 
-// @description count player's moves
+// function for counting moves
 function moveCounter(){
     moves++;
     counter.innerHTML = moves;
@@ -136,4 +126,4 @@ for (var i = 0; i < cards.length; i++){
     card.addEventListener("click", displayCard);
     card.addEventListener("click", speech);
     card.addEventListener("click", cardOpen);
-};
+}
