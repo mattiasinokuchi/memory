@@ -37,12 +37,12 @@ section {
 }
 
 .deck .card.show {
-	font-size: 10vw;
+	font-size: 8vw;
 }
 
 .deck .card.match {
 	background: green;
-	font-size: 10vw;
+	font-size: 8vw;
 }
 
 .deck .card.unmatched {
